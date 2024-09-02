@@ -42,7 +42,7 @@ private OffersService offersService;
         offersService.offre(offre);
     }
 
-    @GetMapping("img/{filename}")
+    @GetMapping("/img/{filename}")
     public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) {
         try {
             Path filePath = Paths.get(uploadDir).resolve(filename).normalize();
