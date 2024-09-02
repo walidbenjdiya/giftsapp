@@ -46,8 +46,8 @@ public class NotificationController {
     }
     @CrossOrigin
     @GetMapping("/welcome")
-    public void notification(){
-        triggerNotification("Welcome back to our trusted Giveaways platform, sir.");
+    public Sinks.EmitResult notification(){
+       return sink.tryEmitNext("Welcome back to our trusted Giveaways platform, sir.");
     }
 }
 
