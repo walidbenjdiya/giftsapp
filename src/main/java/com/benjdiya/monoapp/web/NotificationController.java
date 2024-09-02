@@ -23,6 +23,7 @@ public class NotificationController {
     public NotificationController() {
         this.sink = Sinks.many().multicast().onBackpressureBuffer();
     }
+    @CrossOrigin
     @GetMapping(value = "/notification", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> streamNotifications() {
         // Return the Flux to subscribers
@@ -43,6 +44,7 @@ public class NotificationController {
     public List<NotificationDTO> notificationList(@PathVariable(name = "id") String id){
        return notificationService.notification_LIST(id);
     }
+    @CrossOrigin
     @GetMapping("/welcome")
     public void notification(){
         triggerNotification("Welcome back to our trusted Giveaways platform, sir.");
