@@ -25,8 +25,8 @@ public class SecurityConfig {
                 .csrf(csrf->csrf.disable())
                 .headers(h->h.frameOptions(o->o.disable()))
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(ar->ar.requestMatchers("/img/*","/keycloak/events/*","/notification").permitAll())
-                .authorizeHttpRequests(ar->ar.requestMatchers("/swagger-ui/**","/v3/**").hasAuthority("ADMIN"))
+                .authorizeHttpRequests(ar->ar.requestMatchers("/img/*","/keycloak/events/*","/notification","/swagger-ui/**","/v3/**").permitAll())
+                .authorizeHttpRequests(ar->ar.requestMatchers("/ab").hasAuthority("ADMIN"))
                 .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
                 .oauth2ResourceServer(o2rs->o2rs.jwt(jwt->jwt.jwtAuthenticationConverter(jwtAuthConverter)))
                 .build();
