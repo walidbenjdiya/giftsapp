@@ -2,6 +2,7 @@ package com.benjdiya.monoapp.web;
 
 import com.benjdiya.monoapp.dtos.NotificationDTO;
 import com.benjdiya.monoapp.service.NotificationService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,14 @@ public class NotificationController {
     }
     @CrossOrigin("https://giftstowin.com/")
     @GetMapping(value = "/notification", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> streamNotifications() {
+    public Flux<String> streamNotifications(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "https://giftstowin.com");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        System.out.println("CORS headers set for /notification endpoint");
+        return sink.asFlux().log()
+                .mergeWith(Flux.interval(Duration.ofSeconds(5)).map(tick -> "ping"));
+
         // Return the Flux to subscribers
         return sink.asFlux().log()
                 .mergeWith(Flux.interval(Duration.ofSeconds(5)).map(tick -> "ping"));
