@@ -25,13 +25,10 @@ public class NotificationController {
     public NotificationController() {
         this.sink = Sinks.many().multicast().onBackpressureBuffer();
     }
-    @CrossOrigin("https://giftstowin.com/")
+    @CrossOrigin("*")
     @GetMapping(value = "/notification", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> streamNotifications(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "https://giftstowin.com");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        System.out.println("CORS headers set for /notification endpoint");
+    public Flux<String> streamNotifications() {
+
         return sink.asFlux().log()
                 .mergeWith(Flux.interval(Duration.ofSeconds(5)).map(tick -> "ping"));
 
