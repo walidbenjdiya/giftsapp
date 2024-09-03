@@ -11,6 +11,7 @@ import reactor.core.publisher.Sinks;
 import java.io.IOException;
 
 
+import java.time.Duration;
 import java.util.List;
 
 @RestController
@@ -23,11 +24,13 @@ public class NotificationController {
     public NotificationController() {
         this.sink = Sinks.many().multicast().onBackpressureBuffer();
     }
-    @CrossOrigin
+    @CrossOrigin("https://giftstowin.com/")
     @GetMapping(value = "/notification", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> streamNotifications() {
         // Return the Flux to subscribers
-        return sink.asFlux().log();
+        return sink.asFlux().log()
+                .mergeWith(Flux.interval(Duration.ofSeconds(5)).map(tick -> "ping"));
+
     }
 
     // Call this method whenever you want to send a notification
@@ -46,8 +49,8 @@ public class NotificationController {
     }
     @CrossOrigin
     @GetMapping("/welcome")
-    public Sinks.EmitResult notification(){
-       return sink.tryEmitNext("Welcome back to our trusted Giveaways platform, sir.");
+    public void notification(){
+        sink.emitNext("Welcome back to our trusted Giveaways platform, sir.", Sinks.EmitFailureHandler.FAIL_FAST);
     }
 }
 
