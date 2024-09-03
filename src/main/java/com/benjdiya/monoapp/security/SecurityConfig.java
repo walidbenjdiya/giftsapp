@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .csrf(csrf->csrf.disable())
                 .headers(h->h.frameOptions(o->o.disable()))
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(ar->ar.requestMatchers("/img/*","/keycloak/events/*","/notification","/goldapi","/history/*").permitAll())
+                .authorizeHttpRequests(ar->ar.requestMatchers("/img/*","/keycloak/events/*","/notification","/goldapi/*").permitAll())
                 .authorizeHttpRequests(ar->ar.requestMatchers("/ab").hasAuthority("ADMIN"))
                 .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
                 .oauth2ResourceServer(o2rs->o2rs.jwt(jwt->jwt.jwtAuthenticationConverter(jwtAuthConverter)))
