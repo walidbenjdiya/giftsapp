@@ -32,7 +32,7 @@ public class HistoryController {
        return historyService.HISTORY_LIST(userId);
     }
 
-    @GetMapping("/goldapi")
+    @PostMapping("/goldapi")
     public void Goldapi(@RequestParam String ip, String s1) throws HistoryNotAddedException, OfferNullTargetedPersonne {
         if(s1==null){
             throw new OfferNullTargetedPersonne("the targeted person for offer is null");
