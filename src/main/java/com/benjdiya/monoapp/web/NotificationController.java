@@ -36,8 +36,6 @@ public class NotificationController {
                 .mergeWith(Flux.interval(Duration.ofSeconds(5)).map(tick -> "ping"));
 
         // Return the Flux to subscribers
-        return sink.asFlux().log()
-                .mergeWith(Flux.interval(Duration.ofSeconds(5)).map(tick -> "ping"));
 
     }
 
