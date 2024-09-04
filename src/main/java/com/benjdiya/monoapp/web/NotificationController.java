@@ -29,8 +29,7 @@ public class NotificationController {
     @GetMapping(value = "/notification", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<String> streamNotifications() {
 
-        return sink.asFlux().log()
-                .mergeWith(Flux.interval(Duration.ofSeconds(5)).map(tick -> "ping"));
+        return sink.asFlux().log();
 
         // Return the Flux to subscribers
 
