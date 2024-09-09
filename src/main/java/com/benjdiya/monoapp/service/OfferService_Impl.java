@@ -27,7 +27,7 @@ public class OfferService_Impl implements OffersService {
     }
 
     @Override
-    public List<OffresDTO> OFFRES_DTO_LIST() {
-        return offersRepo.findAll().stream().map(offre -> offerMappers.FromOffre(offre) ).collect(Collectors.toList());
+    public List<OffresDTO> OFFRES_DTO_LIST(Long id) {
+        return offersRepo.findAllByCategoriesId(id).stream().map(offre -> offerMappers.FromOffre(offre) ).collect(Collectors.toList());
     }
 }

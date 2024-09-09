@@ -19,12 +19,14 @@ public class Offres {
     private String title;
     private String image;
     private LocalDateTime raffleDdraw;
+    @ManyToOne
+    private Categories categories;
+
     @OneToMany(mappedBy = "offre", fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-
     private List<History> offresList;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-
     private List<Utilisateur> utlisateursList;
 }

@@ -32,9 +32,9 @@ private OffersService offersService;
     @Value("${image.upload.dir}")
     private String uploadDir;
 
-    @GetMapping("/listoffres")
-    public List<OffresDTO> offerlist() {
-        return offersService.OFFRES_DTO_LIST();
+    @GetMapping("/listoffres/{id}")
+    public List<OffresDTO> offerlist(@PathVariable(name = "id") Long id) {
+        return offersService.OFFRES_DTO_LIST(id);
     }
 
     @PostMapping("/offer")

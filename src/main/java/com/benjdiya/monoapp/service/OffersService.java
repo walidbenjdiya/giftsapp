@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OffersService {
      void offre(OffresDTO offres);
-     List<OffresDTO> OFFRES_DTO_LIST();
+     List<OffresDTO> OFFRES_DTO_LIST(Long id);
 
 
 }
