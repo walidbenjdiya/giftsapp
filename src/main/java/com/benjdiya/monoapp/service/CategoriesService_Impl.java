@@ -12,8 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service @Transactional @AllArgsConstructor @NoArgsConstructor
+@Service @Transactional @AllArgsConstructor
 public class CategoriesService_Impl implements CategoriesService{
+
     CategoriesRepo categoriesRepo;
     CategoriesMapper categoriesMapper;
     @Override
